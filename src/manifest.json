@@ -1,0 +1,10 @@
+{
+  "name": "Bitbucket Navigator",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "User friendly navigate.",
+  "content_scripts": [{
+    "matches": ["*://bitbucket.org/*/pull-requests/*"],
+    "js": ["script.js"]
+  }]
+}
