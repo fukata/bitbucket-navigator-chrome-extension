@@ -1,4 +1,4 @@
-console.log('Run Bitbucket Navigator');
+//console.log('Run Bitbucket Navigator');
 const hash = new Date().getTime();
 const wrapperId = `bitbucket-navigator-nav-link-wrapper-${hash}`;
 
