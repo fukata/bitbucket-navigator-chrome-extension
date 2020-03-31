@@ -2,10 +2,10 @@
 const hash = new Date().getTime();
 const wrapperId = `bitbucket-navigator-nav-link-wrapper-${hash}`;
 
- /**
-  * Handler toggle button
-  * @param {Event} event
-  */
+/**
+ * Handler toggle button
+ * @param {Event} event
+ */
 const onToggle = (event) => {
   const node = event.target;
   const currentText = node.innerText;
@@ -26,7 +26,6 @@ const onToggle = (event) => {
  * Generate navigation links
  * @param {Array} commentLinks
  */
-
 const generateNavLinks = (commentLinks) => {
   //console.log('generateNavLink. commentLinks: ', commentLinks.length);
 
