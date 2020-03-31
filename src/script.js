@@ -48,8 +48,8 @@ const generateNavLinks = (commentLinks) => {
       z-index: 1000;
       color: black;
       padding: 5px;
-      border: 1px solid #999999;
-      background-color: #cccccc;
+      border: 1px solid #cccccc;
+      background-color: #f4f5f7;
     `;
 
     // toggle button
