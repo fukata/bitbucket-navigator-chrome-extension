@@ -84,28 +84,41 @@ const generateNavLinks = (commentLinks) => {
   })
 };
 
+const refreshNavigation = () => {
+  const commentLinks = document.querySelectorAll('#commit-files-summary > li.iterable-item .count-badge');
+  if (commentLinks && commentLinks.length > 0) {
+    generateNavLinks(commentLinks);
+  }
+};
+
 window.onload = () => {
   const prTabContent = document.querySelector('#pr-tab-content');
   if (!prTabContent) {
-    // maybe not pull request page...
+    //console.log('maybe not pull request page...');
     return;
   }
 
   let loadedCommitFilesSummary = false;
 
-  prTabContent.addEventListener('DOMSubtreeModified', (_) => {
-    if (!loadedCommitFilesSummary) {
-      const node = document.querySelector('#commit-files-summary');
-      loadedCommitFilesSummary = !!node;
+  const commitFilesSummaryNode = document.querySelector('#commit-files-summary');
+  if (commitFilesSummaryNode) {
+    loadedCommitFilesSummary = true;
+    refreshNavigation();
+    prTabContent.querySelector('#commit-files-summary').addEventListener('DOMSubtreeModified', (_) => {
+      refreshNavigation();
+    });
+  } else {
+    prTabContent.addEventListener('DOMSubtreeModified', (_) => {
+      if (!loadedCommitFilesSummary) {
+        const node = document.querySelector('#commit-files-summary');
+        loadedCommitFilesSummary = !!node;
 
-      if (loadedCommitFilesSummary) {
-        prTabContent.querySelector('#commit-files-summary').addEventListener('DOMSubtreeModified', (_) => {
-          const commentLinks = document.querySelectorAll('#commit-files-summary > li.iterable-item.file.file-modified .count-badge');
-          if (commentLinks && commentLinks.length > 0) {
-            generateNavLinks(commentLinks);
-          }
-        });
+        if (loadedCommitFilesSummary) {
+          prTabContent.querySelector('#commit-files-summary').addEventListener('DOMSubtreeModified', (_) => {
+            refreshNavigation();
+          });
+        }
       }
-    }
-  });
+    });
+  }
 };
